@@ -2,7 +2,7 @@ name: SonarCloud Scan
 on:
   push:
     branches:
-      - main  # Hoặc master tùy tên nhánh của bạn
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Quan trọng để phân tích đầy đủ
+          fetch-depth: 0
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
@@ -20,6 +20,10 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
+            -Dsonar.projectKey=fcnguyenkhon_Lab2_SecurityCheck
+            -Dsonar.organization=fcnguyenkhon
+            -Dsonar.sources=lab1/loginapp/src
+            -Dsonar.java.binaries=.
             -Dsonar.projectKey=fcnguyenkhon_Lab2_SecurityCheck
             -Dsonar.organization=fcnguyenkhon
             src: -Dsonar.sources=src
